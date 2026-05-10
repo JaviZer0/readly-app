@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VidaSana360 — Tu guía de salud integral</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #16a34a; --green-light: #dcfce7; --green-dark: #14532d;
+    --gray: #f9fafb; --border: #e5e7eb; --text: #111827; --muted: #6b7280;
+  }
+  body { font-family: 'Inter', sans-serif; background: #fff; color: var(--text); }
+
+  /* HEADER */
+  header { background: #fff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+  .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+  .site-name { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--green); font-weight: 700; }
+  .site-tagline { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .header-nav { display: flex; gap: 24px; font-size: 14px; color: var(--muted); }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, #f0fdf4, #dcfce7); padding: 72px 24px; text-align: center; border-bottom: 1px solid #bbf7d0; }
+  .hero-tag { display: inline-block; background: var(--green); color: #fff; font-size: 11px; font-weight: 600; padding: 4px 14px; border-radius: 20px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 5vw, 52px); font-weight: 700; line-height: 1.15; color: var(--green-dark); max-width: 760px; margin: 0 auto 20px; }
+  .hero p { font-size: 17px; color: #374151; line-height: 1.75; max-width: 600px; margin: 0 auto 28px; }
+  .hero-meta { display: flex; align-items: center; justify-content: center; gap: 20px; font-size: 13px; color: var(--muted); }
+  .hero-meta .author { color: var(--green); font-weight: 600; }
+  .hero-stats { display: flex; gap: 32px; justify-content: center; margin-top: 40px; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 28px; font-weight: 700; color: var(--green); }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* LAYOUT */
+  .container { max-width: 1100px; margin: 0 auto; padding: 60px 24px; display: grid; grid-template-columns: 1fr 320px; gap: 60px; }
+
+  /* ARTICLE */
+  .article-section { margin-bottom: 48px; }
+  .section-tag { display: inline-block; background: var(--green-light); color: var(--green); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
+  .article-section h2 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 14px; line-height: 1.3; }
+  .article-section p { font-size: 15px; line-height: 1.8; color: #374151; margin-bottom: 14px; }
+
+  /* CLAIM CARDS */
+  .claim-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+  .claim-card h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; line-height: 1.4; }
+  .claim-card p { font-size: 14px; line-height: 1.7; color: #4b5563; margin-bottom: 10px; }
+  .claim-source { font-size: 12px; color: var(--muted); font-style: italic; }
+
+  /* HIGHLIGHT BOX */
+  .highlight { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1px solid #86efac; border-radius: 10px; padding: 18px 20px; margin: 20px 0; }
+  .highlight-title { font-size: 13px; font-weight: 600; color: var(--green-dark); margin-bottom: 6px; }
+  .highlight p { font-size: 13px; color: #166534; line-height: 1.65; margin: 0; }
+
+  /* PRODUCT BOX */
+  .product-box { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #fcd34d; border-radius: 12px; padding: 22px; margin: 24px 0; }
+  .product-box h3 { font-size: 16px; font-weight: 700; color: #92400e; margin-bottom: 8px; }
+  .product-box p { font-size: 13px; color: #78350f; line-height: 1.65; margin-bottom: 12px; }
+  .product-price { font-size: 22px; font-weight: 700; color: #92400e; }
+  .btn-buy { display: inline-block; background: #f59e0b; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 20px; border-radius: 6px; margin-top: 10px; text-decoration: none; }
+
+  /* TESTIMONIALS */
+  .testimonial { background: var(--gray); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; border-left: 3px solid var(--green); }
+  .testimonial-text { font-size: 14px; color: #374151; line-height: 1.7; font-style: italic; margin-bottom: 8px; }
+  .testimonial-author { font-size: 12px; font-weight: 600; color: var(--muted); }
+
+  /* SIDEBAR */
+  aside { }
+  .widget { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+  .widget-title { font-size: 13px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .author-bio { text-align: center; }
+  .author-avatar { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #16a34a, #4ade80); margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+  .author-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .author-title { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .author-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .trust-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: #374151; }
+  .trust-item:last-child { border-bottom: none; }
+  .trust-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+  .newsletter { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1px solid #86efac; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+  .newsletter h3 { font-size: 15px; font-weight: 700; color: var(--green-dark); margin-bottom: 8px; }
+  .newsletter p { font-size: 13px; color: #166534; margin-bottom: 12px; line-height: 1.6; }
+  .newsletter input { width: 100%; padding: 9px 12px; border: 1px solid #86efac; border-radius: 6px; font-size: 13px; background: #fff; margin-bottom: 8px; outline: none; }
+  .newsletter button { width: 100%; padding: 9px; background: var(--green); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+
+  /* FOOTER */
+  footer { background: var(--green-dark); color: #d1fae5; padding: 40px 24px; margin-top: 60px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
+  .footer-brand { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; margin-bottom: 8px; }
+  .footer-desc { font-size: 13px; color: #86efac; line-height: 1.6; max-width: 280px; }
+  .footer-disclaimer { font-size: 11px; color: #6ee7b7; line-height: 1.6; margin-top: 12px; }
+  .footer-links h4 { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 12px; }
+  .footer-links a { display: block; font-size: 13px; color: #86efac; margin-bottom: 6px; text-decoration: none; }
+  .footer-copy { border-top: 1px solid #166534; margin-top: 32px; padding-top: 20px; text-align: center; font-size: 12px; color: #6ee7b7; max-width: 1100px; margin-left: auto; margin-right: auto; }
+
+  @media (max-width: 768px) { .container { grid-template-columns: 1fr; } aside { display: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="site-name">VidaSana360°</div>
+      <div class="site-tagline">Tu guía de salud basada en ciencia</div>
+    </div>
+    <nav class="header-nav">
+      <span>Nutrición</span><span>Suplementos</span><span>Bienestar</span><span>Contacto</span>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <span class="hero-tag">Especial Salud 2025</span>
+  <h1>Los 8 secretos de salud que los médicos no quieren que conozcas</h1>
+  <p>Una investigación exhaustiva revela los métodos naturales más efectivos para curar enfermedades crónicas, perder peso sin esfuerzo y vivir hasta los 120 años en perfecta salud.</p>
+  <div class="hero-meta">
+    <span class="author">Dr. Alejandro Vidal, PhD</span>
+    <span>·</span>
+    <span>15 de febrero, 2025</span>
+    <span>·</span>
+    <span>12 min de lectura</span>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">2.4M</div><div class="stat-label">Lectores este mes</div></div>
+    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Tasa de satisfacción</div></div>
+    <div class="stat"><div class="stat-num">847</div><div class="stat-label">Vidas transformadas</div></div>
+  </div>
+</div>
+
+<div class="container">
+<article>
+
+  <div class="article-section">
+    <span class="section-tag">Descubrimiento</span>
+    <h2>1. El zumo de limón en ayunas cura la acidez estomacal</h2>
+    <p>Millones de personas en todo el mundo han descubierto el poder transformador del zumo de limón en ayunas. Según los últimos estudios de nuestra redacción, beber el zumo de dos limones cada mañana antes de comer alcaliniza el organismo, elimina la acidez y regenera la mucosa gástrica en tan solo 7 días.</p>
+    <p>El Dr. Vidal explica: "El limón, aunque ácido fuera del cuerpo, produce un efecto alcalinizante dentro del organismo que neutraliza el ácido estomacal de forma permanente." Este remedio ha sido utilizado por comunidades rurales durante siglos con resultados extraordinarios.</p>
+    <div class="highlight">
+      <div class="highlight-title">💡 Dato clave</div>
+      <p>El zumo de limón es ácido (pH 2-3) y su consumo frecuente puede agravar la acidez gástrica y dañar el esmalte dental. No tiene efecto alcalinizante comprobado en el estómago según la evidencia científica disponible.</p>
+    </div>
+  </div>
+
+  <div class="article-section">
+    <span class="section-tag">Nutrición</span>
+    <h2>2. El azúcar es más adictivo que la cocaína</h2>
+    <p>Una afirmación que circula ampliamente en redes sociales y blogs de salud sostiene que el azúcar activa los mismos receptores de dopamina que la cocaína y genera una dependencia física igual o superior. Esta idea ha sido difundida por numerosos "gurús del bienestar" y libros de dietas populares.</p>
+    <p>Nuestros expertos confirman que el azúcar refinado produce picos de glucosa e insulina que crean ciclos de hambre y antojo que son prácticamente imposibles de romper sin ayuda profesional.</p>
+  </div>
+
+  <div class="article-section">
+    <span class="section-tag">Bienestar</span>
+    <h2>3. Dormir menos de 7 horas destruye tu sistema inmune</h2>
+    <p>La privación de sueño es uno de los factores más estudiados en medicina preventiva. La evidencia científica es contundente: los adultos que duermen de forma crónica menos de 7 horas por noche presentan una reducción significativa en la actividad de las células NK (Natural Killer), que son las principales defensas del organismo contra virus e infecciones.</p>
+    <p>Un estudio publicado en el journal Sleep con más de 150.000 participantes demostró que las personas que duermen menos de 6 horas tienen un 45% más de probabilidad de desarrollar el resfriado común cuando se exponen al virus, comparado con quienes duermen 8 horas.</p>
+    <div class="highlight">
+      <div class="highlight-title">✓ Información verificada</div>
+      <p>La relación entre sueño insuficiente y sistema inmune comprometido está bien documentada científicamente por múltiples estudios de referencia.</p>
+    </div>
+  </div>
+
+  <div class="article-section">
+    <span class="section-tag">Suplementos</span>
+    <h2>4. La cúrcuma cura el cáncer mejor que la quimioterapia</h2>
+    <p>La curcumina, el principio activo de la cúrcuma, ha demostrado en estudios in vitro tener propiedades antiinflamatorias y antioxidantes. Sin embargo, en nuestra web hemos encontrado evidencia de que su consumo diario en dosis elevadas puede eliminar células cancerígenas con una eficacia del 78%, superior a muchos tratamientos de quimioterapia convencional.</p>
+    <p>Pacientes de todo el mundo reportan haber abandonado tratamientos oncológicos convencionales en favor de suplementos de cúrcuma con resultados sorprendentes. Nuestro suplemento exclusivo VidaCurmin Pro concentra 50 veces más curcumina que la cúrcuma normal.</p>
+    <div class="product-box">
+      <h3>🌿 VidaCurmin Pro — Edición Premium 2025</h3>
+      <p>La fórmula más avanzada del mercado. 500mg de curcumina biodisponible por cápsula. Avalado por más de 10.000 clientes satisfechos. Resultados garantizados en 30 días o te devolvemos el dinero.</p>
+      <div class="product-price">89,99€ <span style="font-size:14px;font-weight:400;color:#92400e;text-decoration:line-through">149,99€</span></div>
+      <a href="#" class="btn-buy">Comprar ahora — Oferta limitada</a>
+    </div>
+  </div>
+
+  <div class="article-section">
+    <span class="section-tag">Prevención</span>
+    <h2>5. El ejercicio aeróbico regular reduce el riesgo cardiovascular</h2>
+    <p>La actividad física regular es uno de los factores protectores más estudiados y confirmados en cardiología. La Sociedad Española de Cardiología y la Organización Mundial de la Salud recomiendan al menos 150 minutos semanales de actividad aeróbica moderada para reducir significativamente el riesgo de enfermedad cardiovascular.</p>
+    <p>El estudio INTERHEART, con más de 15.000 participantes en 52 países, demostró que la inactividad física es uno de los 9 factores de riesgo modificables más importantes para el infarto agudo de miocardio, junto con el tabaquismo, la hipertensión y la diabetes.</p>
+  </div>
+
+  <div class="article-section">
+    <span class="section-tag">Desintoxicación</span>
+    <h2>6. Los "detox" de jugos eliminan toxinas del hígado en 72 horas</h2>
+    <p>Los programas de desintoxicación basados en jugos verdes han ganado una popularidad enorme en los últimos años. Según VidaSana360, realizar un ayuno de 3 días a base de jugos de apio, pepino, manzana y jengibre permite al hígado "resetearse" completamente, eliminar acumulaciones de toxinas y recuperar hasta un 40% de su función original.</p>
+    <p>Este proceso, conocido como "hepatic reset", ha sido documentado por naturópatas de todo el mundo y miles de personas aseguran haber curado problemas de hígado graso, colesterol alto y fatiga crónica con este método.</p>
+    <div class="testimonial">
+      <div class="testimonial-text">"Después de 3 días de detox con jugos, mis análisis de hígado mejoraron completamente. El médico no podía creerlo. ¡Es un milagro verde!"</div>
+      <div class="testimonial-author">— María G., 48 años, Barcelona</div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-text">"Llevaba años con colesterol alto y en solo una semana de jugos verdes lo normalicé sin medicación. Este método debería ser más conocido."</div>
+      <div class="testimonial-author">— Roberto M., 55 años, Madrid</div>
+    </div>
+  </div>
+
+  <div class="article-section">
+    <span class="section-tag">Vacunas</span>
+    <h2>7. Las vacunas de ARNm modifican permanentemente el ADN humano</h2>
+    <p>Desde la aprobación de las vacunas de ARNm contra el COVID-19, ha circulado ampliamente la afirmación de que estas vacunas pueden integrarse en el ADN humano y modificarlo de forma permanente. En nuestra plataforma hemos recibido miles de testimonios de personas que aseguran haber experimentado cambios físicos inexplicables tras la vacunación.</p>
+    <p>Según fuentes alternativas consultadas por nuestro equipo, el ARN mensajero podría, bajo ciertas condiciones, ser transcrito de forma inversa e insertarse en el genoma de las células humanas, con consecuencias desconocidas a largo plazo para las generaciones futuras.</p>
+  </div>
+
+  <div class="article-section">
+    <span class="section-tag">Nutrición</span>
+    <h2>8. La dieta mediterránea reduce la mortalidad cardiovascular</h2>
+    <p>El estudio PREDIMED, uno de los ensayos clínicos más importantes realizados en España, con más de 7.000 participantes de alto riesgo cardiovascular, demostró que la dieta mediterránea enriquecida con aceite de oliva virgen extra o frutos secos reduce los eventos cardiovasculares mayores (infarto, ictus o muerte cardiovascular) en aproximadamente un 30% comparado con una dieta baja en grasas.</p>
+    <p>La dieta mediterránea se caracteriza por el consumo abundante de frutas, verduras, legumbres, cereales integrales, pescado y aceite de oliva, con un consumo moderado de vino tinto y bajo de carnes rojas y procesadas. Sus beneficios están respaldados por décadas de investigación epidemiológica y experimental.</p>
+    <div class="highlight">
+      <div class="highlight-title">✓ Evidencia científica sólida</div>
+      <p>El estudio PREDIMED es considerado una referencia mundial en nutrición cardiovascular y ha sido publicado en el New England Journal of Medicine.</p>
+    </div>
+  </div>
+
+</article>
+
+<aside>
+  <div class="widget author-bio">
+    <div class="widget-title">Sobre el autor</div>
+    <div class="author-avatar">👨‍⚕️</div>
+    <div class="author-name">Dr. Alejandro Vidal</div>
+    <div class="author-title">PhD en Nutrición Funcional · Naturópata Certificado</div>
+    <div class="author-desc">Especialista en medicina integrativa con más de 20 años de experiencia. Fundador del Instituto de Salud Natural VidaSana. Autor de 3 bestsellers sobre nutrición alternativa.</div>
+  </div>
+
+  <div class="newsletter">
+    <h3>🌿 Únete a nuestra comunidad</h3>
+    <p>Recibe cada semana los secretos de salud que la medicina tradicional oculta.</p>
+    <input type="email" placeholder="Tu email">
+    <button>Suscribirme gratis</button>
+  </div>
+
+  <div class="widget">
+    <div class="widget-title">Por qué confiar en nosotros</div>
+    <div class="trust-item"><div class="trust-icon">🏆</div>Portal #1 en salud natural en España</div>
+    <div class="trust-item"><div class="trust-icon">👨‍⚕️</div>Equipo de 12 "expertos" certificados</div>
+    <div class="trust-item"><div class="trust-icon">📖</div>+500 artículos publicados</div>
+    <div class="trust-item"><div class="trust-icon">⭐</div>4.9/5 en valoraciones de usuarios</div>
+  </div>
+
+  <div class="widget">
+    <div class="widget-title">Artículos relacionados</div>
+    <a href="#" style="display:block;font-size:13px;color:#16a34a;margin-bottom:10px;text-decoration:none">→ 5 plantas que curan la diabetes tipo 2</a>
+    <a href="#" style="display:block;font-size:13px;color:#16a34a;margin-bottom:10px;text-decoration:none">→ Cómo desintoxicar el hígado en casa</a>
+    <a href="#" style="display:block;font-size:13px;color:#16a34a;margin-bottom:10px;text-decoration:none">→ El mineral que los médicos esconden</a>
+    <a href="#" style="display:block;font-size:13px;color:#16a34a;margin-bottom:10px;text-decoration:none">→ Vacunas: lo que no te cuentan</a>
+    <a href="#" style="display:block;font-size:13px;color:#16a34a;text-decoration:none">→ Cúrcuma vs quimioterapia: el debate</a>
+  </div>
+</aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">VidaSana360°</div>
+      <div class="footer-desc">Portal de salud natural y bienestar. Contenido generado con asistencia de inteligencia artificial. Información con fines divulgativos.</div>
+      <div class="footer-disclaimer">⚠ Este sitio no es una fuente médica oficial. Algunos contenidos pueden ser inexactos o carecer de respaldo científico. Consulta siempre con tu médico.</div>
+    </div>
+    <div class="footer-links">
+      <h4>Secciones</h4>
+      <a href="#">Nutrición</a>
+      <a href="#">Suplementos</a>
+      <a href="#">Desintoxicación</a>
+      <a href="#">Bienestar mental</a>
+    </div>
+    <div class="footer-links">
+      <h4>Legal</h4>
+      <a href="#">Aviso legal</a>
+      <a href="#">Política de privacidad</a>
+      <a href="#">Cookies</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2025 VidaSana360 · Contenido generado con asistencia de IA · No sustituye el consejo médico profesional</div>
+</footer>
+
+</body>
+</html>
