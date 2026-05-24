@@ -143,7 +143,7 @@ export default async function handler(req, res) {
   } else if (type === 'docx') {
     try {
       const buf = Buffer.from(content, 'base64');
-      const raw = buf.toString('latin1');
+      const raw = buf.toString('utf-8');
       let text = raw
         .replace(/<[^>]+>/g, ' ')
         .replace(/[^\x20-\x7E]/g, ' ')
